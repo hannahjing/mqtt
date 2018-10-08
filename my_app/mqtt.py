@@ -1,24 +1,41 @@
-
-
 import paho.mqtt.client as mqtt
-from my_project import settings
+from . import views
+
+MQTT_Topic = "coordinates/#"
+
 
 def on_connect(mqttc, obj, flags, rc):
     print("rc: " + str(rc))
+    mqttc.subscribe(MQTT_Topic, 0)
+
 
 def on_message(mosq, obj, msg):
-    global s
-    print(msg.payload)
-#    s.send(msg.payload)
+    #global s
+    #print(msg.payload)
+    #views.getdata(msg.payload)
+    #store_Sensor_Data_to_DB.sensor_Data_Handler(msg.topic, msg.payload)
+    #views.sensor_Data_Handler(msg.topic, msg.payload)
+    #s = msg.payload
+    data_parse(msg.topic, msg.payload)
 
-#def on_publish(mqttc, obj, mid):
-#    print("mid: " + str(mid))
 
 def on_subscribe(mqttc, obj, mid, granted_qos):
     print("Subscribed: " + str(mid) + " " + str(granted_qos))
 
+
 def on_log(mqttc, obj, level, string):
     print(string)
+
+def data_parse(topic,data):
+    topicSplit = topic.split('/')
+    mystation = topicSplit[1]
+    global xyz, repeat, geo
+    if topic == "coordinates/" + mystation + "/XYZ":
+        xyz=data
+    elif topic == "coordinates/" + mystation + "/repeatability":
+        repeat=data
+    elif topic == "coordinates/" + mystation + "/geodetic":
+        geo=data
 
 
 # Define MQTT broker server
@@ -33,8 +50,5 @@ mqttc = mqtt.Client() #create new instance
 mqttc.on_message = on_message
 mqttc.on_connect = on_connect
 
-mqttc.connect(broker_address, broker_port, 60) #connect to broker
-xyz = mqttc.subscribe("coordinates/+/XYZ") #subscribe
-#mqttc.loop_forever()
-
+mqttc.connect(broker_address, broker_port, 60)
 

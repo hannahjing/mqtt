@@ -9,15 +9,18 @@ def index(request):
 
 
 def location(request):
-    return HttpResponse(mqtt.mqttc.loop_start())
+
+    dict_xyz = {'xyz': mqtt.xyz}
+    return render(request,'my_app/location.html', dict_xyz)
 
 
 def geo(request):
-    return render(request, 'my_app/geo.html')
+    dict_geo ={'geo':mqtt.geo}
+    return render(request, 'my_app/geo.html', dict_geo)
 
 
 def repeatablity(request):
-    return render(request, 'my_app/repeatability.html')
-
+    dict_repeat={'repeat':mqtt.repeat}
+    return render(request, 'my_app/repeatability.html', dict_repeat)
 
 

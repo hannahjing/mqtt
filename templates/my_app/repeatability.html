@@ -2,26 +2,9 @@
 <<html>
   <head>
     <title>Push button, send message</title>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
-
-    <script type="text/javascript">
-
-      var clientID = "ID-" + Math.round(Math.random() * 1000);
-      var client = new Paho.MQTT.Client("192.168.0.18", 9001, clientID);
-
-      client.connect({onSuccess:onConnect});
-
-      function onConnect() {
-        console.log("connected");
-      }
-		function show_me() {
-			//alert(this.value + ' was clicked'); // this references the element which the click event was invoked on.
-
-			var message = new Paho.MQTT.Message("q" + this.value);
-			message.destinationName = "home/skyq";
-			client.send(message);			}
-
-    </script>
+  </head>
+  <body>
+<div>{{ repeat }}</div>
 
   </body>
 </html>
