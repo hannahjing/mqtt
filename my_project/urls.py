@@ -24,5 +24,6 @@ urlpatterns = [
     url(r'^my_app/',include('my_app.urls')),
     url(r'^admin/', admin.site.urls),
 
+
     ]
 

@@ -7,8 +7,7 @@ app_name = 'my_app'
 
 urlpatterns = [
     url(r'^geo/$', views.geo, name='geo'),
-    url(r'^location/$',views.location, name='location'),
+    url(r'^location/$', views.location, name='location'),
     url(r'^repeatability/$', views.repeatablity, name='repeatability'),
-
-
+    url(r'^test/$', views.test, name='test'),
 ]
