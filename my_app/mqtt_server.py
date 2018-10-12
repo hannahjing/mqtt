@@ -1,13 +1,10 @@
 import paho.mqtt.client as mqtt
-from . import views
 
-MQTT_Topic = "coordinates/#"
+MQTT_Topic = "auscors/GA/CORS/RTCMv3/+/OBS/#"
 #globlist_id=[]
 #globlist_x=[]
+timestamp = []
 
-globdict2={}
-globdict3={}
-globdict={}
 def on_connect(mqttc, obj, flags, rc):
     print("rc: " + str(rc))
     mqttc.subscribe(MQTT_Topic, 0)
@@ -35,27 +32,15 @@ def on_log(mqttc, obj, level, string):
 
 def data_parse(topic,data):
     topicSplit = topic.split('/')
-    mystation = topicSplit[1]
-    #[id,x,y,z]=data.decode("utf-8").split(',')
+    mystation = topicSplit[4]
     data=data.decode("utf-8").split(',')
-    global globdict2, globdict3,globdict
-    if topic == "coordinates/" + mystation + "/XYZ":
-
-        #globlist_id.append(id)
-        #globlist_x.append(x)
-        #globlist.append(data)
-
-        globdict[mystation]=data[1:4]
-
-
-    elif topic == "coordinates/" + mystation + "/repeatability":
-        globdict2[mystation]=data[1:4]
-    elif topic == "coordinates/" + mystation + "/geodetic":
-        globdict3[mystation]=data[1:4]
-
-
+    dictionary=[]
+    global timestamp
+    if topic =="auscors/GA/CORS/RTCMv3/"+mystation+"/OBS/timestamped":
+        dictionary[mystation]=data
+        timestamp.append(data)
 # Define MQTT broker server
-broker_address="203.101.225.212"
+broker_address="203.101.226.126"
 broker_port = 1883
 
 #TCP_IP = '127.0.0.1'

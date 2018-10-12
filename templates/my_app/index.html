@@ -7,37 +7,100 @@
       <title>My App</title>
       <link rel="stylesheet" href= "{% static "css/generalstyle.css" %}">
       <link rel="stylesheet" href= "{% static "css/bootstrap.min.css" %}">
+      <link rel="stylesheet" href= "{% static "js/bootstrap.bundle.js" %}">
 <link rel="stylesheet" herf="{% static "css/google-maps-admin.css" %}">
       <link rel="script" herf="{% static "js/google-maps-admin.js" %}">
+<style type="text/css">
+body {
+    background: linear-gradient(to top right, #787878 0%, #181818 100%);
+    background-attachment: fixed;
 
+}
+h1 {color:lightgray}
+
+
+    .card{
+         -moz-box-shadow:2px 2px 10px #181818;
+     -webkit-box-shadow:2px 2px 10px #181818;
+     box-shadow:2px 2px 10px #181818;
+        height: auto;
+    }
+
+    p{
+        color:lightgray;
+    }
+    .bottom-footer{
+        margin-top: 100px;
+       text-align: center;
+       height: 80px;
+        width: auto;
+        bottom:0px;
+        background: #808080;
+    }
+    header{
+        height:auto;
+        width: 100%;
+
+        text-align: center;
+        font: normal;
+
+    }
+
+
+       /* Set the size of the div element that contains the map */
+      #map {
+        height: 500px;  /* The height is 400 pixels */
+        width: 100%;  /* The width is the width of the web page */
+
+      }
+    .container{
+        width:auto;
+        height: auto;
+    }
+    a{
+         height:auto;
+        width: auto;
+    }
+  hr{
+      background-color: #5d5d5d;
+  }
+    .list-unstyled{
+
+        color: #C8C8C8;
+        margin-top: 50px;
+    }
+
+
+</style>
   </head>
   <body>
  <!--start header-->
- <divrr>
- <header class="main-header" style="background-image: url("static/images/headerimg.jpg")">
+<header class="header no-fixed" style="background-image: url("")">
+<img id="headerimg" src="static/images/h.png" alt="" style="width:100%;height:80%;">
+
+
+
 <!--start logo-->
-<a class="branding" title="cors network">
-<img id="headerimg" src="static/images/headerimg.jpg" alt="" style="width:100%;height:80%;">
-</a>
 <!--end logo-->
 </header>
-</divrr>
+
 <!--end header-->
 
 <!--start navigation-->
- <div>
-<nav class="navbar navbar-expand-lg navbar-light bg-light ">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="#"><b>GNSS</b></a>
+
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav">
+  <div class="collapse navbar-collapse" id="navbarNavDropdown" >
+    <ul class="navbar-nav" style="position: center">
       <li class="nav-item active">
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'my_app:test' %}">Features</a>
+        <a class="nav-link" href="{% url 'my_app:test' %}">Latency</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Performance</a>
@@ -55,20 +118,57 @@
     </ul>
   </div>
 </nav>
-     </div>
 
 <!--end navigation-->
-
 <!-- map start-->
+<div id="map"></div>
+ <script>
+// Initialize and add the map
+function initMap() {
+    var locations ={{ my_data|safe }};
 
- <div class="container" style="margin-top:9mm;">
-<iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d11202199.699221574!2d128.05609055575718!3d-26.821425440783557!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sau!4v1538478434056" width="1100" height="600" frameborder="0" style="border:0" allowfullscreen></iframe>
- </div>
+
+    // The location of Uluru
+    var uluru = {lat: -25.344, lng: 131.036};
+    // The map, centered at Uluru
+    var map = new google.maps.Map(
+        document.getElementById('map'), {zoom: 4, center: uluru});
+    // The marker, positioned at Uluru
+    //var marker = new google.maps.Marker({position: uluru, map: map});
+    var infowindow = new google.maps.InfoWindow();
+    var marker, i;
+    var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+
+    for (i = 0; i < locations.length; i++) {
+        marker = new google.maps.Marker({
+            position: new google.maps.LatLng(locations[i][0], locations[i][1]),
+            map: map,
+            icon:image,
+        });
+
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          infowindow.setContent(locations[i][0]);
+          infowindow.open(map, marker);
+        }
+      })(marker, i));
+    }
+}
+    </script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxwsnFZGOL4DpvfXCpgO3QQWXzUmXe36U&callback=initMap"
+  type="text/javascript"></script>
 
 <!--end map-->
- <div class="container" style="margin-top: 9mm"  >
-  <div class="card-deck">
-   <div class="card">
+<div class="container" style="margin-top: 40px"><h1>CorsNetwork</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.Lorem ipsum dolor sit amet,<br/> consectetur adipiscing elit. Integer posuere erat a ante.</p>
+</div>
+<!--card start-->
+
+ <div class="container" style="margin-top: 50px"  >
+  <div class="card-deck" style="margin-top: 50px">
+   <div class="card" style="height: 450px">
+                  <img class="card-img-top" src="static/images/card2.png" alt="Card image cap">
+
     <div class="card-body">
       <h5 class="card-title">Station Status</h5>
       <ul>
@@ -78,27 +178,54 @@
         </ul>
     </div>
   </div>
-  <div class="card">
-
+  <div class="card" style="height: 450px">
+   <img class="card-img-top" src="static/images/card1.jpg" alt="Card image cap">
     <div class="card-body">
       <h5 class="card-title">CPU performance</h5>
-           <a href="#" class="card-link">Station Repeatability</a>
-           <a href="#" class="card-link">Station location</a>
-           <a href="#" class="card-link">Station XYZ</a>
+          <li><a href="{% url 'my_app:repeatability' %}" class="card-link">CPU usage</a></li>
+          <li><a href="{% url 'my_app:location' %}" class="card-link">CPU memory</a></li>
+           <li><a href="{% url 'my_app:geo' %}" class="card-link">CPU</a></li>
 
     </div>
 
   </div>
-  <div class="card">
+  <div class="card" >
+   <img class="card-img-top" src="static/images/card4.png" alt="Card image cap">
 
     <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+
+      <h5 class="card-title">Time Latency</h5>
  <a href="#" class="card-link">View more</a>
     </div>
 
 
      </div>
+<!-end card-->
+ <!--list media-->
+     <ul class="list-unstyled">
+  <li class="media" style="margin-top: 30px">
+    <img class="mr-3" src="https://cdn.iconscout.com/icon/premium/png-128-thumb/navigation-235-660099.png" alt="Generic placeholder image">
+    <div class="media-body" style="margin-top: 30px">
+      <h5 class="mt-0 mb-1">List-based media object</h5>
+      Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+    </div>
+  </li>
+  <li class="media my-4" style="margin-top: 30px">
+    <img class="mr-3" src="static/images/icon.png" alt="Generic placeholder image">
+    <div class="media-body" style="margin-top: 30px">
+      <h5 class="mt-0 mb-1">List-based media object</h5>
+      Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+    </div>
+  </li>
+  <li class="media" style="margin-top: 30px">
+    <img class="mr-3" src="https://cdn.iconscout.com/icon/premium/png-128-thumb/australia-49-569656.png" alt="Generic placeholder image">
+    <div class="media-body" style="margin-top: 30px">
+      <h5 class="mt-0 mb-1">List-based media object</h5>
+      Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+    </div>
+  </li>
+</ul>
+<!--end list media-->
 
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -106,6 +233,8 @@
 
   </div>
  </div>
+<footer class="bottom-footer"><p>This is for monitoring data<br/>2018- gnss data version 18.10.9<br/>author:Jing Gao</p></footer>
+
   </body>
 
 </html>

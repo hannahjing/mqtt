@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 {% load staticfiles %}
 
@@ -6,39 +9,90 @@
       <meta charset="utf-8">
       <title>My App</title>
       <link rel="stylesheet" href= "{% static "css/generalstyle.css" %}">
-      <link rel="stylesheet" href= "{% static "css/bootstrap.min.css" %}">
-<link rel="stylesheet" herf="{% static "css/google-maps-admin.css" %}">
-      <link rel="script" herf="{% static "js/google-maps-admin.js" %}">
+<style>
+    html,body{
+        background-size: 100%;
+        background-position: fixed;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+
+
+    }
+    .bottom-footer{
+        margin-top: 100px;
+       text-align: center;
+       height: 80px;
+        width: auto;
+        bottom:0px;
+        background: #808080;
+    }
+tr{
+    text-align: center;
+}
+    div{
+        background: white;
+        opacity:0.7;
+        width: 65%;
+        height: auto;
+        position: sticky;
+         top: 0;
+    left: 0;
+    right: 0;
+    bottom: 50px;
+        margin: auto;
+border-radius: 20px;
+
+
+
+    }
+    table{
+        overflow-scrolling: auto;
+    }
+    .bottom-footer{
+        margin-top: 100px;
+       text-align: center;
+       height: 80px;
+        width: auto;
+        margin-bottom:0px;
+        background: #808080;
+        position: sticky;
+
+    }
+</style>
   </head>
-  <body>
+  <body background="https://media.gettyimages.com/photos/small-world-picture-id160645644" >
 
 
-<div class="container" style="margin-top: 50px">
-
-<div class="jumbotron">
-  <h1 class="display-4">Station Location</h1>
-  <p class="lead">....</p>
-  <hr class="my-4">
-  <p><table id="table" style="width:80%", align="center">
+<div class="container" style="margin-top: 50px" align="center">
+  <h1>Station Geogetic</h1>
+  <p class="lead">____________________________________________________________________________</p>
+  <p><table style="width:65%">
 
   <tr>
     <th>Station Id</th>
-    <th>X</th>
-      <th>Y</th>
-     <th>Z</th>
+    <th></th>
+      <th></th>
+     <th></th>
 
   </tr>
 
-    {% for i in geo %}
+
+
+       {% for key, value in geo.items %}
   <tr>
-  {% for d in i %}
-    <td>{{ d }}</td>
-      {% endfor %}
+    <td>{{ key }}</td>
+      {% for i in value %}
+        <td>{{ i }}</td>
+          {% endfor %}
   </tr>
      {% endfor %}
+
+
 
 </table></p>
 </div>
 
-</div></body>
+
+</body>
+
 </html>
