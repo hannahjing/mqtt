@@ -24,6 +24,7 @@ h1 {color:lightgray}
      -webkit-box-shadow:2px 2px 10px #181818;
      box-shadow:2px 2px 10px #181818;
         height: auto;
+
     }
 
     p{
@@ -121,7 +122,7 @@ h1 {color:lightgray}
 
 <!--end navigation-->
 <!-- map start-->
-<div id="map"></div>
+<div class="container" id="map"></div>
  <script>
 // Initialize and add the map
 function initMap() {
@@ -131,7 +132,8 @@ function initMap() {
     var locations_value={{ myvalue|safe }};
     var locations_key={{ mykey|safe }};
     // The location of Uluru
-    var uluru = {lat: -25.344, lng: 131.036};
+    //var uluru = {lat: -25.344, lng: 131.036};
+    var uluru={lat:11.865092944444443,lng:78.92958655555556};
     // The map, centered at Uluru
     var map = new google.maps.Map(
         document.getElementById('map'), {zoom: 2, center: uluru});
@@ -139,13 +141,13 @@ function initMap() {
     //var marker = new google.maps.Marker({position: uluru, map: map});
     var infowindow = new google.maps.InfoWindow();
     var marker,i;
-
     for (i = 0; i < locations_value.length; i++) {
 
 
         marker = new google.maps.Marker({
              map: map,
-             position: new google.maps.LatLng(locations_value[i][0], locations_value[i][1])
+             position: new google.maps.LatLng(locations_value[i][0], locations_value[i][1]),
+             icon:'https://cdn.iconscout.com/icon/premium/png-32-thumb/gps-80-104308.png',
             });
         google.maps.event.addListener(marker, 'click', (function(marker,i) {
         return function() {
@@ -168,7 +170,7 @@ function initMap() {
  <div class="container" style="margin-top: 50px"  >
   <div class="card-deck" style="margin-top: 50px">
    <div class="card" style="height: 450px">
-                  <img class="card-img-top" src="static/images/card2.png" alt="Card image cap">
+                  <img class="card-img-top" src="https://media.gettyimages.com/vectors/know-where-you-want-to-go-vector-id682478188" alt="Card image cap" style="height: 70%">
 
     <div class="card-body">
       <h5 class="card-title">Station Status</h5>
@@ -180,7 +182,7 @@ function initMap() {
     </div>
   </div>
   <div class="card" style="height: 450px">
-   <img class="card-img-top" src="static/images/card1.jpg" alt="Card image cap">
+   <img class="card-img-top" src="https://media.gettyimages.com/vectors/location-icon-vector-id926654488" alt="Card image cap" style="height: 70%">
     <div class="card-body">
       <h5 class="card-title">CPU performance</h5>
           <li><a href="{% url 'my_app:repeatability' %}" class="card-link">CPU usage</a></li>
@@ -191,7 +193,7 @@ function initMap() {
 
   </div>
   <div class="card" >
-   <img class="card-img-top" src="static/images/card4.png" alt="Card image cap">
+   <img class="card-img-top" src="https://media.gettyimages.com/vectors/navigation-vector-id887302090" alt="Card image cap" style="height: 70%">
 
     <div class="card-body">
 

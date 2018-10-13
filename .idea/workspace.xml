@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="02713d99-5420-4dd0-a64a-12b9dbd0c4de" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my_app/mqtt.py" beforeDir="false" afterPath="$PROJECT_DIR$/my_app/mqtt.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my_app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/my_app/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/my_app/geo.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/my_app/geo.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my_app/mqtt_server.py" beforeDir="false" afterPath="$PROJECT_DIR$/my_app/mqtt_server.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/my_app/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/my_app/index.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -74,20 +72,20 @@
           <entry key="Django Console" value="3" />
           <entry key="css" value="451" />
           <entry key="db" value="23" />
-          <entry key="html" value="7583" />
+          <entry key="html" value="7819" />
           <entry key="js" value="2" />
-          <entry key="py" value="9821" />
+          <entry key="py" value="9832" />
           <entry key="sql" value="4" />
-          <entry key="txt" value="31" />
+          <entry key="txt" value="62" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="451" />
-          <entry key="HTML" value="7526" />
+          <entry key="HTML" value="7762" />
           <entry key="JavaScript" value="59" />
-          <entry key="PLAIN_TEXT" value="54" />
-          <entry key="Python" value="9824" />
+          <entry key="PLAIN_TEXT" value="85" />
+          <entry key="Python" value="9835" />
           <entry key="Scratch" value="4" />
         </counts>
       </usages-collector>
@@ -100,8 +98,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/my_app/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="136" column="48" selection-start-line="136" selection-start-column="48" selection-end-line="136" selection-end-column="48" />
+            <state relative-caret-position="-83">
+              <caret line="196" selection-start-line="196" selection-end-line="196" />
+              <folding>
+                <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -142,8 +145,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/my_app/mqtt_server.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4">
-              <caret line="34" column="29" lean-forward="true" selection-start-line="34" selection-start-column="29" selection-end-line="34" selection-end-column="29" />
+            <state relative-caret-position="282">
+              <caret line="45" lean-forward="true" selection-start-line="45" selection-end-line="45" />
             </state>
           </provider>
         </entry>
@@ -217,7 +220,6 @@
         <option value="$PROJECT_DIR$/static/css/generalstyle.css" />
         <option value="$PROJECT_DIR$/my_project/urls.py" />
         <option value="$PROJECT_DIR$/my_app/models.py" />
-        <option value="$PROJECT_DIR$/my_app/mqtt_server.py" />
         <option value="$PROJECT_DIR$/templates/my_app/repeatability.html" />
         <option value="$PROJECT_DIR$/templates/my_app/test.html" />
         <option value="$PROJECT_DIR$/templates/my_app/location.html" />
@@ -225,6 +227,7 @@
         <option value="$PROJECT_DIR$/my_project/settings.py" />
         <option value="$PROJECT_DIR$/my_app/views.py" />
         <option value="$PROJECT_DIR$/my_app/mqtt.py" />
+        <option value="$PROJECT_DIR$/my_app/mqtt_server.py" />
         <option value="$PROJECT_DIR$/templates/my_app/index.html" />
       </list>
     </option>
@@ -408,7 +411,28 @@
       <option name="project" value="LOCAL" />
       <updated>1539323956413</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="add marker">
+      <created>1539415801706</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1539415801706</updated>
+    </task>
+    <task id="LOCAL-00006" summary="add marker">
+      <created>1539415826656</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1539415826656</updated>
+    </task>
+    <task id="LOCAL-00007" summary="add infowindow">
+      <created>1539416432483</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1539416432483</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView">
@@ -483,7 +507,9 @@
     <MESSAGE value="11" />
     <MESSAGE value="display topic" />
     <MESSAGE value="layout" />
-    <option name="LAST_COMMIT_MESSAGE" value="layout" />
+    <MESSAGE value="add marker" />
+    <MESSAGE value="add infowindow" />
+    <option name="LAST_COMMIT_MESSAGE" value="add infowindow" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file:///anaconda3/envs/myDjangoEnv/lib/python3.7/site-packages/django/core/management/__init__.py">
@@ -714,13 +740,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/my_app/mqtt_server.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4">
-          <caret line="34" column="29" lean-forward="true" selection-start-line="34" selection-start-column="29" selection-end-line="34" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/my_app/mqtt.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -741,10 +760,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/my_app/mqtt_server.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="45" lean-forward="true" selection-start-line="45" selection-end-line="45" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/my_app/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="136" column="48" selection-start-line="136" selection-start-column="48" selection-end-line="136" selection-end-column="48" />
+        <state relative-caret-position="-83">
+          <caret line="196" selection-start-line="196" selection-end-line="196" />
+          <folding>
+            <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

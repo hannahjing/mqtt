@@ -33,13 +33,14 @@ def on_log(mqttc, obj, level, string):
 def data_parse(topic,data):
     topicSplit = topic.split('/')
     mystation = topicSplit[4]
-    data=data.decode("utf-8").split(',')
-    dictionary=[]
+    #data=data.decode("utf-8").split(',')
     global timestamp
     if topic =="auscors/GA/CORS/RTCMv3/"+mystation+"/OBS/timestamped":
         dictionary[mystation]=data
         timestamp.append(data)
+    print(timestamp)
 # Define MQTT broker server
+
 broker_address="203.101.226.126"
 broker_port = 1883
 
