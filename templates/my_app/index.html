@@ -112,7 +112,7 @@ h1 {color:lightgray}
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <a class="dropdown-item" href="{% url 'my_app:repeatability' %}">repeatability</a>
           <a class="dropdown-item" href="{% url 'my_app:location' %}">Station location</a>
-          <a class="dropdown-item" href="{% url 'my_app:geo' %}"> XYZ</a>
+          <a class="dropdown-item" href="{% url 'my_app:geo' %}"> Station Geodetic</a>
         </div>
       </li>
     </ul>
@@ -142,13 +142,14 @@ function initMap() {
 
     for (i = 0; i < locations_value.length; i++) {
 
+
         marker = new google.maps.Marker({
              map: map,
              position: new google.maps.LatLng(locations_value[i][0], locations_value[i][1])
             });
         google.maps.event.addListener(marker, 'click', (function(marker,i) {
         return function() {
-          infowindow.setContent(locations_key[i]);
+          infowindow.setContent('name:   <b>'+locations_key[i]+'</b><br/>geodetic:<br/>'+locations_value[i],);
           infowindow.open(map, marker);
         }
       })(marker, i));
