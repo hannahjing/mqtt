@@ -1,12 +1,14 @@
 from django.shortcuts import render
 from . import mqtt,models,mqtt_server
 import json
+from builtins import filter
 # Create your views here.
 
 
 def index(request):
-    location_data=json.dumps(mqtt.globdict,separators=(',', ':'))
-    return render(request, 'my_app/index.html',{"my_data": location_data})
+    location_key=mqtt.key
+    location_value=mqtt.value
+    return render(request, 'my_app/index.html',{'myvalue':json.dumps(location_value),'mykey':json.dumps(location_key)})
 
 
 def location(request):

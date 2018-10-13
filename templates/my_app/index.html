@@ -125,33 +125,34 @@ h1 {color:lightgray}
  <script>
 // Initialize and add the map
 function initMap() {
-    var locations ={{ my_data|safe }};
-
-
+    //var locations = [
+    //    ['brisbane', - 27.470125, 153.021072],
+   // ['uluru', -25.344, 131.036]];'
+    var locations_value={{ myvalue|safe }};
+    var locations_key={{ mykey|safe }};
     // The location of Uluru
     var uluru = {lat: -25.344, lng: 131.036};
     // The map, centered at Uluru
     var map = new google.maps.Map(
-        document.getElementById('map'), {zoom: 4, center: uluru});
+        document.getElementById('map'), {zoom: 2, center: uluru});
     // The marker, positioned at Uluru
     //var marker = new google.maps.Marker({position: uluru, map: map});
     var infowindow = new google.maps.InfoWindow();
-    var marker, i;
-    var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+    var marker,i;
 
-    for (i = 0; i < locations.length; i++) {
+    for (i = 0; i < locations_value.length; i++) {
+
         marker = new google.maps.Marker({
-            position: new google.maps.LatLng(locations[i][0], locations[i][1]),
-            map: map,
-            icon:image,
-        });
-
-        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+             map: map,
+             position: new google.maps.LatLng(locations_value[i][0], locations_value[i][1])
+            });
+        google.maps.event.addListener(marker, 'click', (function(marker,i) {
         return function() {
-          infowindow.setContent(locations[i][0]);
+          infowindow.setContent(locations_key[i]);
           infowindow.open(map, marker);
         }
       })(marker, i));
+
     }
 }
     </script>
@@ -159,11 +160,12 @@ function initMap() {
   type="text/javascript"></script>
 
 <!--end map-->
+
+{{ mykey }}
 <div class="container" style="margin-top: 40px"><h1>CorsNetwork</h1>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.Lorem ipsum dolor sit amet,<br/> consectetur adipiscing elit. Integer posuere erat a ante.</p>
 </div>
 <!--card start-->
-
  <div class="container" style="margin-top: 50px"  >
   <div class="card-deck" style="margin-top: 50px">
    <div class="card" style="height: 450px">
