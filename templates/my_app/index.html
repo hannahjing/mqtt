@@ -71,7 +71,30 @@ h1 {color:lightgray}
         margin-top: 50px;
     }
 
+ ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    #content li {
+        font-size: 14px;
+        height: 20px;
+        line-height: 20px;
 
+    }
+    #scrollUpBox {
+        height: 40px;
+        background: white;
+        margin: auto;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        width: auto;
+        padding: 0 15px;
+        border-radius: 2px;
+        overflow: hidden;
+    }
 </style>
   </head>
   <body>
@@ -123,49 +146,122 @@ h1 {color:lightgray}
 <!--end navigation-->
 <!-- map start-->
 <div class="container" id="map"></div>
+
+
+<div class="container" id="scrollUpBox">
+    <ul id="content">
+<li>Latency:</li>
+        {% for key,value in latency.items %}
+             <li>{{ key }}:{{ value }}</li>
+
+
+        {% endfor %}
+    </ul>
+</div>
+<script type="text/javascript">
+    var scrollUpBox = document.getElementById('scrollUpBox');
+    var content = document.getElementById('content');
+    function scrollUp() {
+        if (scrollUpBox.scrollTop >= (content.clientHeight - scrollUpBox.clientHeight)) {
+            scrollUpBox.scrollTop = 0;
+        } else {
+            scrollUpBox.scrollTop++;
+        }
+    }
+    var TIME = 50;
+    var timer = setInterval(scrollUp, TIME);
+    scrollUpBox.onmouseover = function() {
+        clearInterval(timer);
+    }
+    scrollUpBox.onmouseout = function() {
+        timer = setInterval(scrollUp, TIME);
+    }
+</script>
  <script>
 // Initialize and add the map
 function initMap() {
     //var locations = [
     //    ['brisbane', - 27.470125, 153.021072],
-   // ['uluru', -25.344, 131.036]];'
-    var locations_value={{ myvalue|safe }};
-    var locations_key={{ mykey|safe }};
+    // ['uluru', -25.344, 131.036]];'
+    var locations_value ={{ myvalue|safe }};
+    var locations_key ={{ mykey|safe }};
+    var connection_id ={{ id|safe }}
+    var connection_time ={{ time|safe }}
+    //var connection={{ id|safe }};
     // The location of Uluru
     //var uluru = {lat: -25.344, lng: 131.036};
-    var uluru={lat:11.865092944444443,lng:78.92958655555556};
+    var uluru = {lat: -27.470125, lng: 153.021072};
     // The map, centered at Uluru
     var map = new google.maps.Map(
-        document.getElementById('map'), {zoom: 2, center: uluru});
+        document.getElementById('map'), {zoom: 6, center: uluru});
     // The marker, positioned at Uluru
     //var marker = new google.maps.Marker({position: uluru, map: map});
     var infowindow = new google.maps.InfoWindow();
-    var marker,i;
+    var marker, i;
+
+    function isInArray(arr, value,time) {
+        for (j = 0; j < arr.length; j++) {
+            if (value === arr[j]) {
+
+                if(time[j]>1){ return 1;}
+                else if(time[j]>0.5){return 2;}
+                else if(time[j]>0.2){return 3;}
+                else{return 4;}
+
+            }
+        }
+    }
+
+    function iconColor(station, icon_station,latency) {
+        if (isInArray(station, icon_station,latency)===1 ) {
+            iconimg = "https://cdn.iconscout.com/icon/premium/png-64-thumb/caution-stand-1-983621.png"
+        }
+        else  if (isInArray(station, icon_station,latency)===2 ) {
+            iconimg = "https://cdn.iconscout.com/icon/premium/png-32-thumb/location-1194-358819.png"
+        }
+        else if(isInArray(station, icon_station,latency)===3){
+            iconimg = "https://cdn.iconscout.com/icon/premium/png-48-thumb/location-1194-358819.png"
+        }else if(isInArray(station, icon_station,latency)===4){
+            iconimg = "https://cdn.iconscout.com/icon/premium/png-32-thumb/location-510-274482.png"
+        }
+        else iconimg="https://cdn.iconscout.com/icon/premium/png-32-thumb/gps-80-104308.png"
+        return iconimg;
+
+    }
     for (i = 0; i < locations_value.length; i++) {
 
 
         marker = new google.maps.Marker({
-             map: map,
-             position: new google.maps.LatLng(locations_value[i][0], locations_value[i][1]),
-             icon:'https://cdn.iconscout.com/icon/premium/png-32-thumb/gps-80-104308.png',
-            });
-        google.maps.event.addListener(marker, 'click', (function(marker,i) {
-        return function() {
+            map: map,
+            position: new google.maps.LatLng(locations_value[i][1], locations_value[i][0]),
+            icon: iconColor(connection_id, locations_key[i],connection_time)
+
+        });
+
+ google.maps.event.addListener(marker, 'click', (function(marker,i) {
+            return function() {
+
           infowindow.setContent('name:   <b>'+locations_key[i]+'</b><br/>geodetic:<br/>'+locations_value[i],);
           infowindow.open(map, marker);
         }
       })(marker, i));
 
+
     }
+
+
 }
+
     </script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxwsnFZGOL4DpvfXCpgO3QQWXzUmXe36U&callback=initMap"
   type="text/javascript"></script>
 
 <!--end map-->
+
  <div class="container" style="margin-top: 40px"><h1>CorsNetwork</h1>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.Lorem ipsum dolor sit amet,<br/> consectetur adipiscing elit. Integer posuere erat a ante.</p>
 </div>
+
 <!--card start-->
  <div class="container" style="margin-top: 50px"  >
   <div class="card-deck" style="margin-top: 50px">
@@ -177,7 +273,7 @@ function initMap() {
       <ul>
         <li><a href="{% url 'my_app:repeatability' %}" class="card-link">Station Repeatability</a></li>
           <li><a href="{% url 'my_app:location' %}" class="card-link">Station location</a></li>
-           <li><a href="{% url 'my_app:geo' %}" class="card-link">Station XYZ</a></li>
+           <li><a href="{% url 'my_app:geo' %}" class="card-link">Geodetic</a></li>
         </ul>
     </div>
   </div>
@@ -209,21 +305,21 @@ function initMap() {
   <li class="media" style="margin-top: 30px">
     <img class="mr-3" src="https://cdn.iconscout.com/icon/premium/png-128-thumb/navigation-235-660099.png" alt="Generic placeholder image">
     <div class="media-body" style="margin-top: 30px">
-      <h5 class="mt-0 mb-1">List-based media object</h5>
+      <h4 class="mt-0 mb-1">List-based media object</h4>
       Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
     </div>
   </li>
   <li class="media my-4" style="margin-top: 30px">
     <img class="mr-3" src="static/images/icon.png" alt="Generic placeholder image">
     <div class="media-body" style="margin-top: 30px">
-      <h5 class="mt-0 mb-1">List-based media object</h5>
+      <h4 class="mt-0 mb-1">List-based media object</h4>
       Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
     </div>
   </li>
   <li class="media" style="margin-top: 30px">
     <img class="mr-3" src="https://cdn.iconscout.com/icon/premium/png-128-thumb/australia-49-569656.png" alt="Generic placeholder image">
     <div class="media-body" style="margin-top: 30px">
-      <h5 class="mt-0 mb-1">List-based media object</h5>
+      <h4 class="mt-0 mb-1">List-based media object</h4>
       Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
     </div>
   </li>

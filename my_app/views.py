@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from . import mqtt,models,mqtt_server
+from . import mqtt,models,mqtt_server,latency
 import json
 from builtins import filter
 # Create your views here.
@@ -8,7 +8,12 @@ from builtins import filter
 def index(request):
     location_key=mqtt.key
     location_value=mqtt.value
-    return render(request, 'my_app/index.html',{'myvalue':json.dumps(location_value),'mykey':json.dumps(location_key)})
+    lat_id=latency.id
+    lat_time=latency.latency_time
+    lat=latency.latency
+    return render(request, 'my_app/index.html',{'myvalue':json.dumps(location_value),'mykey':json.dumps(location_key),
+                                                'latency':lat,'id':json.dumps(lat_id),'time':json.dumps(lat_time)})
+    #'time':json.dumps((lat_time))})
 
 
 def location(request):
