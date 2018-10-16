@@ -34,6 +34,16 @@ def repeatablity(request):
 
 
 def test(request):
-    dict_test ={'timestamp': mqtt_server.timestamp}
-    return render(request, 'my_app/test.html', dict_test)
+    lat_id = latency.id
+    lat_time = latency.latency_time
+    lat = latency.latency
+    return render(request, 'my_app/test.html', {'id':json.dumps(lat_id),'time':json.dumps(lat_time),'latency':lat})
 
+
+def performance(request):
+    S1=mqtt_server.MITProject_2018_S1
+    S2=mqtt_server.MITProject_2018_S2
+    S3=mqtt_server.MITProject_2018_S3
+    S4=mqtt_server.MITProject_2018_S4
+    RA=mqtt_server.raspberrypi
+    return render(request, 'my_app/performance.html', {'s1':S1,'s2':S2,'s3':S3,'s4':S4,'ra':RA})

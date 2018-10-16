@@ -1,3 +1,7 @@
+
+
+
+
 <!DOCTYPE html>
 {% load staticfiles %}
 
@@ -5,28 +9,50 @@
   <head>
       <meta charset="utf-8">
       <title>My App</title>
+      <link rel="stylesheet" href= "{% static "css/bootstrap.min.css" %}">
+      <link rel="stylesheet" href= "{% static "js/bootstrap.bundle.js" %}">
       <link rel="stylesheet" href= "{% static "css/generalstyle.css" %}">
 <style>
-    html,body{
-        background-size: 100%;
-        background-position: fixed;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
 
+body { font-family: sans-serif;
+font-weight: 300;
+}
+
+    header{
+        height:450px;
+        width: 100%;
+        background: linear-gradient(140deg, #00C4CC 25%, #6E44BD);
+        text-align: center;
+        color: white;
+        background-size: cover;
+        margin-top: 0;
 
     }
-    .bottom-footer{
-        margin-top: 100px;
-       text-align: center;
-       height: 80px;
-        width: auto;
-        bottom:0px;
-        background: #808080;
-    }
+
+.content h2 {
+      margin: auto;
+      position: absolute;
+      top:160px;
+      left: 0;
+      right: 0;
+
+    font-size: 2.57143em;
+    max-width: 460px;
+    line-height: 46px;
+      -webkit-font-smoothing: antialiased;
+          font-weight: 300;
+
+
+
+       }
 tr{
     text-align: center;
+
 }
-    div{
+th{font-family: sans-serif;
+font-size: 25px;
+    ;}
+    d{
         background: white;
         opacity:0.7;
         width: 65%;
@@ -51,27 +77,57 @@ border-radius: 20px;
        height: 80px;
         width: auto;
         margin-bottom:0px;
-        background: #808080;
         position: sticky;
+        color: grey;
 
     }
+     ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    #content li {
+        font-size: 14px;
+        height: 20px;
+        line-height: 20px;
+    }
+
+    #arrow{
+        position: fixed;
+margin: auto;
+        right: 0px;
+        opacity: 70%;
+
+    }
+
 </style>
   </head>
-  <body background="https://media.gettyimages.com/photos/small-world-picture-id160645644" >
+  <body >
 
 
-<div class="container" style="margin-top: 50px" align="center">
-  <h1>Station Location</h1>
-  <p class="lead">____________________________________________________________________________</p>
+<header>
+
+    <div class="content">
+<h2>Station Location</h2>
+
+        </div>
+
+
+</header>
+
+<button type="button" class="btn " id="arrow" onclick="click_scroll()"><img src="https://cdn.iconscout.com/icon/free/png-64/arrow-1964-444487.png"></button>
+<div class="container" style="margin-top: 50px;" align="center" >
   <p><table style="width:65%">
 
   <tr>
     <th>Station Id</th>
-    <th>X</th>
-      <th>Y</th>
-     <th>Z</th>
+    <th></th>
+      <th></th>
+     <th></th>
 
   </tr>
+
+
 
     {% for key, value in xyz.items %}
   <tr>
@@ -82,10 +138,29 @@ border-radius: 20px;
   </tr>
      {% endfor %}
 
-</table></p>
-</div>
 
+
+
+
+</table></p>
+
+
+
+
+</div>
+ <script type="text/javascript">
+function click_scroll() {
+var scroll_offset = $(".content").offset(); //得到pos这个div层的offset，包含两个值，top和left
+$("body,html").animate({
+scrollTop:scroll_offset.top //让body的scrollTop等于pos的top，就实现了滚动
+},800);
+}
+</script>
+<footer class="bottom-footer">
+    <div class="container"> <hr></div>
+    <p>This is for monitoring data<br/>2018- gnss data version 18.10.9<br/>author:Jing Gao</p></footer>
 
 </body>
-
+<script src="//wow.techbrood.com/libs/jquery/jquery.min.js"></script>
+      <script type="text/javascript" src="js/jquery.scrollTo.js"></script>
 </html>

@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'^location/$', views.location, name='location'),
     url(r'^repeatability/$', views.repeatablity, name='repeatability'),
     url(r'^test/$', views.test, name='test'),
+    url(r'^performance/$', views.performance, name='performance'),
 ]
