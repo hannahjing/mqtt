@@ -9,7 +9,6 @@ globdict2={}
 globdict3={}
 globdict={}
 key=[]
-#value=[['brisbane', '- 27.470125', '153.021072'],['uluru', '-25.344', '131.036']]
 value=[]
 
 list_to_float = []
@@ -19,14 +18,6 @@ def on_connect(mqttc, obj, flags, rc):
 
 
 def on_message(mosq, obj, msg):
-    #global s
-
-    #print(msg.payload)
-    #views.getdata(msg.payload)
-    #store_Sensor_Data_to_DB.sensor_Data_Handler(msg.topic, msg.payload)
-    #views.sensor_Data_Handler(msg.topic, msg.payload)
-    #s = msg.payload
-    #list = []
     data_parse(msg.topic, msg.payload)
     return msg.payload
 
@@ -45,20 +36,7 @@ def data_parse(topic,data):
     newdata=data.decode("utf-8").split(',')
     global globdict2, globdict3,globdict,key,value,list_to_float
     if topic == "coordinates/" + mystation + "/XYZ":
-        #globlist_id.append(id)
-        #globlist_x.append(x)
-        #globlist.append(data)
         globdict[mystation]=newdata[1:4]
-
-        #list_to_float = map(lambda x: float(x), value)
-
-
-       # for each in value:
-           # each_line = list(map(lambda x: float(x), each))
-            #list_to_float.append(each_line)
-
-
-
     elif topic == "coordinates/" + mystation + "/repeatability":
         globdict2[mystation]=newdata[1:4]
     elif topic == "coordinates/" + mystation + "/geodetic":

@@ -115,6 +115,7 @@ font-weight: 300;}
         color: white;
         height: 40px;
         width: auto;
+        border: 0;
         border-radius: 5px;
     }
 #latency{
@@ -138,6 +139,19 @@ font-weight: 300;}
     bottom: 0;
       position: relative;
 }
+    .card-title{
+        position: relative;
+        top: 110px;
+        left: 20%;
+        color: white;
+        font-weight: 300;
+
+    }
+     .mr-3{
+        border-radius: 5%;
+        height: 70px;
+        width: 70px;
+    }
 </style>
   </head>
   <body>
@@ -338,8 +352,7 @@ function initMap() {
             icon: iconColor(connection_id, locations_key[i],connection_time)
 
         });
-
- google.maps.event.addListener(marker, 'click', (function(marker,i) {
+        google.maps.event.addListener(marker, 'click', (function(marker,i) {
             return function() {
 
           infowindow.setContent('name:   <b>'+locations_key[i]+'</b><br/>geodetic:<br/>'+locations_value[i],);
@@ -354,7 +367,7 @@ function initMap() {
 }
 
     </script>
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxwsnFZGOL4DpvfXCpgO3QQWXzUmXe36U&callback=initMap"
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxwsnFZGOL4DpvfXCpgO3QQWXzUmXe36U&callback=initMap&language=en-US"
   type="text/javascript"></script>
 
 <!--end map-->
@@ -368,34 +381,38 @@ function initMap() {
  <div class="container" style="margin-top: 50px"  >
   <div class="card-deck" style="margin-top: 50px;width: 90%">
    <div class="card" id="bottom_card" style="height: 450px">
-  <div class="card-img-top" style="background-image: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%)"></div>
+  <div class="card-img-top" style="background-image: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%)"><h5 class="card-title">Station Status</h5></div>
     <div class="card-body">
-      <h5 class="card-title">Station Status</h5>
-      <ul>
-        <li><a href="{% url 'my_app:repeatability' %}" class="card-link">Station Repeatability</a></li>
-          <li><a href="{% url 'my_app:location' %}" class="card-link">Station location</a></li>
-           <li><a href="{% url 'my_app:geo' %}" class="card-link">Geodetic</a></li>
-        </ul>
+
+        <ul class="list-group list-group-flush">
+    <li class="list-group-item"><a href="{% url 'my_app:repeatability' %}" class="card-link">Station Repeatability</a></li>
+    <li class="list-group-item"><a href="{% url 'my_app:location' %}" class="card-link">Station location</a></li>
+    <li class="list-group-item"><a href="{% url 'my_app:geo' %}" class="card-link">Geodetic</a></li>
+  </ul>
     </div>
   </div>
   <div class="card" style="height: 450px">
-  <div class="card-img-top" style="background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);height: 240px;"></div>
+  <div class="card-img-top" style="background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);height: 240px;">      <h5 class="card-title">CPU performance</h5>
+</div>
     <div class="card-body">
-      <h5 class="card-title">CPU performance</h5>
-          <li><a href="{% url 'my_app:repeatability' %}" class="card-link">CPU usage</a></li>
-          <li><a href="{% url 'my_app:location' %}" class="card-link">CPU memory</a></li>
-           <li><a href="{% url 'my_app:geo' %}" class="card-link">CPU</a></li>
+                <ul class="list-group list-group-flush">
 
+         <li class="list-group-item"><a href="{% url 'my_app:repeatability' %}" class="card-link">CPU usage</a></li>
+          <li class="list-group-item"><a href="{% url 'my_app:location' %}" class="card-link">CPU memory</a></li>
+           <li class="list-group-item"><a href="{% url 'my_app:geo' %}" class="card-link">CPU</a></li>
+                </ul>
     </div>
 
   </div>
   <div class="card" >
-  <div class="card-img-top" style="background-image: linear-gradient(to top, #fad0c4 0%, #fad0c4 1%, #ffd1ff 100%);height: 240px"></div>
+  <div class="card-img-top" style="background-image: linear-gradient(to top, #fad0c4 0%, #fad0c4 1%, #ffd1ff 100%);height: 240px">      <h5 class="card-title">Time Latency</h5>
+</div>
 
     <div class="card-body">
+        <ul class="list-group list-group-flush">
 
-      <h5 class="card-title">Time Latency</h5>
- <a href="#" class="card-link">View more</a>
+        <li class="list-group-item"><a href="#" class="card-link">View more</a></li>
+        </ul>
     </div>
 
 
@@ -405,7 +422,8 @@ function initMap() {
      <ul class="list-unstyled">
   <li class="media" style="margin-top: 30px">
     <img class="mr-3" src="https://cdn.iconscout.com/icon/premium/png-128-thumb/navigation-235-660099.png" alt="Generic placeholder image">
-    <div class="media-body" style="margin-top: 30px">
+
+      <div class="media-body" style="margin-top: 30px">
       <h4 class="mt-0 mb-1">List-based media object</h4>
       Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
     </div>
@@ -437,8 +455,7 @@ function initMap() {
 <footer class="bottom-footer">
     <div class="container"> <hr></div>
     <p>This is for monitoring data<br/>2018- gnss data version 18.10.9<br/>author:Jing Gao</p></footer>
-
   </body>
 <script src="//wow.techbrood.com/libs/jquery/jquery.min.js"></script>
-      <script type="text/javascript" src="js/jquery.scrollTo.js"></script>
+  <script type="text/javascript" src="js/jquery.scrollTo.js"></script>
 </html>
