@@ -2,6 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/KUTSearchEngine" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/mqtt-data-monitoring-website" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/my_base" vcs="Git" />
   </component>

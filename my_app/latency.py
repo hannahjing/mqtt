@@ -5,8 +5,8 @@ import paho.mqtt.client as mqtt
 
 mytime = 0
 latency = {}
-
-
+id=[]
+latency_time=[]
 def on_connect(mqttc, obj, flags, rc):
     print("rc: " + str(rc))
 
@@ -37,7 +37,7 @@ def data_parse(topic, data):
     # [id,x,y,z]=data.decode("utf-8").split(',')
     newdata = data.decode("utf-8").split(',')
     newdata = list(map(lambda x: float(x), newdata))
-    global mytime, latency, newtime,id,latency_time
+    global mytime, latency, newtime, id,latency_time
     for i in mystation:
         station_name = mystation[0:4]
     if topic == "auscors/GA/CORS/RTCMv3/" + mystation + "/OBS/timestamped":
